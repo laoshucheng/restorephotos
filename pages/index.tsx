@@ -8,6 +8,7 @@ import SquigglyLines from '../components/SquigglyLines';
 import { Testimonials } from '../components/Testimonials';
 
 const Home: NextPage = () => {
+  console.log('hello')
   return (
     <div className='flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen'>
       <Head>
