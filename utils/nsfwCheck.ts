@@ -13,10 +13,9 @@ class NSFWPredictor {
     console.log('Loading model...');
     try {
       this.model = await nsfwjs.load(
-        '/model.json', // 相对路径
+        'https://cdn.jsdelivr.net/gh/infinitered/nsfwjs@master/models/mobilenet_v2/',
         {
-          base: 'https://cdn.jsdelivr.net/gh/infinitered/nsfwjs@master/models/mobilenet_v2/',
-          cache: false, // 禁用缓存
+          type: 'graph',
         }
       );
     } catch (error) {
