@@ -1,5 +1,5 @@
-import * as tf from "@tensorflow/tfjs";
-import * as nsfwjs from "nsfwjs";
+import * as tf from '@tensorflow/tfjs';
+import * as nsfwjs from 'nsfwjs';
 
 tf.enableProdMode();
 
@@ -10,19 +10,23 @@ class NSFWPredictor {
     this.getModel();
   }
   async getModel() {
-    console.log("getModels");
+    console.log('Loading model...');
     try {
       this.model = await nsfwjs.load(
-        "https://raw.githubusercontent.com/infinitered/nsfwjs/refs/heads/master/models/mobilenet_v2/model.json"
+        '/model.json', // 相对路径
+        {
+          base: 'https://cdn.jsdelivr.net/gh/infinitered/nsfwjs@master/models/mobilenet_v2/',
+          cache: false, // 禁用缓存
+        }
       );
     } catch (error) {
-      console.error(error);
+      console.error('Model loading failed:', error);
     }
   }
 
   predict(element: HTMLImageElement, guesses: number) {
     if (!this.model) {
-      throw new Error("Some error occured, please try again later!");
+      throw new Error('Some error occured, please try again later!');
     }
     return this.model.classify(element, guesses);
   }
@@ -30,7 +34,7 @@ class NSFWPredictor {
   async predictImg(file: File, guesses = 5) {
     const url = URL.createObjectURL(file);
     try {
-      const img = document.createElement("img");
+      const img = document.createElement('img');
       img.width = 400;
       img.height = 400;
 
@@ -53,10 +57,10 @@ class NSFWPredictor {
     try {
       const predictions = await this.predictImg(file, 3);
       const pornPrediction = predictions.find(
-        ({ className }) => className === "Porn"
+        ({ className }) => className === 'Porn'
       );
       const hentaiPrediction = predictions.find(
-        ({ className }) => className === "Hentai"
+        ({ className }) => className === 'Hentai'
       );
 
       if (!pornPrediction || !hentaiPrediction) {
