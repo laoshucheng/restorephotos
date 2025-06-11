@@ -13,10 +13,7 @@ class NSFWPredictor {
     console.log('Loading model...');
     try {
       this.model = await nsfwjs.load(
-        'https://cdn.jsdelivr.net/gh/infinitered/nsfwjs@master/models/mobilenet_v2/',
-        {
-          type: 'graph',
-        }
+        'https://cdn.jsdelivr.net/gh/infinitered/nsfwjs@master/models/mobilenet_v2/'
       );
     } catch (error) {
       console.error('Model loading failed:', error);
