@@ -15,7 +15,6 @@ import LoadingDots from '../components/LoadingDots';
 import Toggle from '../components/Toggle';
 import appendNewToName from '../utils/appendNewToName';
 import downloadPhoto from '../utils/downloadPhoto';
-import NSFWFilter from 'nsfw-filter';
 import { useSession, signIn } from 'next-auth/react';
 import useSWR from 'swr';
 import { Rings } from 'react-loader-spinner';
@@ -46,7 +45,7 @@ const Home: NextPage = () => {
     ): Promise<UploadWidgetOnPreUploadResult | undefined> => {
       let isSafe = false;
       try {
-        isSafe = await NSFWFilter.isSafe(file);
+        // isSafe = await NSFWFilter.isSafe(file);
         console.log({ isSafe });
       } catch (error) {
         console.error('NSFW predictor threw an error', error);
